@@ -1,5 +1,8 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  #  after_save(:on => :create) do
+  #   @post.url = post_url(@post)
+  # end
 
   # GET /posts
   # GET /posts.json
@@ -10,6 +13,7 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
+    @post = Post.find(params[:id])
   end
 
   # GET /posts/new
@@ -23,7 +27,7 @@ class PostsController < ApplicationController
 
   # POST /posts
   # POST /posts.json
-  def create
+  def create   
     @post = Post.new(post_params)
 
     respond_to do |format|
@@ -69,6 +73,6 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit(:name, :url)
+      params.require(:post).permit(:name, :url, :category_id)
     end
 end
