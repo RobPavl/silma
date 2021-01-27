@@ -37,11 +37,19 @@ RSpec.describe "/categories", type: :request do
       get category_url(category)
       expect(response).to be_successful
     end
+
+    it "renders a successful response for get categories, which have posts with shared url" do
+      category = Category.create! valid_attributes
+      post = Post.create!(category_id: category.id)
+      get category_url(category)
+      expect(response).to be_successful
+    end
   end
 
   describe "GET /new" do
     it "renders a successful response" do
-      get new_category_url
+      category = Category.create! valid_attributes
+      get category_url(category)
       expect(response).to be_successful
     end
   end

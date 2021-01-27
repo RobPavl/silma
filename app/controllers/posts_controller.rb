@@ -7,7 +7,13 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    @categories = Category.all
+    cate = params[:cate]
+    if !cate.nil?
+      @posts = Post.where(category_id: cate)
+    else
+      @posts = Post.all
+    end  
   end
 
   # GET /posts/1
